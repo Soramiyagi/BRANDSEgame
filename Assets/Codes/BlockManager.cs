@@ -8,6 +8,7 @@ public class BlockManager : MonoBehaviour
 
     public Vector2[] flyStonePos = new Vector2[4];  //浮遊石の座標(4つまで保存可能・(-1,-1)に設定することで無効化)
 
+    public int blockWidth, blockHeight;
     public float blockInterval = 0;   //ブロック同士の幅
 
 
@@ -15,9 +16,9 @@ public class BlockManager : MonoBehaviour
     void Start()
     {
         //フィールドのブロックを配置
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < blockHeight; i++)
         {
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < blockWidth; j++)
             {
                 Instantiate(block, new Vector3(blockInterval * i, 0, blockInterval * j), Quaternion.identity, this.transform).name = $"Block_{i}_{j}";
             }
