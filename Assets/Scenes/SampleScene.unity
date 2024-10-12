@@ -408,7 +408,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1470199874
 BoxCollider:
@@ -505,10 +505,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1470199872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b73456b19ae794d848b0a2f25aeb36, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b0ab6bbc9e4c3045a879cec51604214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  jumpForce: 5
+  skill1CooldownTime: 5
+  skill2CooldownTime: 7
+  characterName: DefaultCharacter
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

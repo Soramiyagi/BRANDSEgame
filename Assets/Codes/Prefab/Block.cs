@@ -69,9 +69,15 @@ public class Block : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))//Playerが床に接触すると一定時間経過後に床が落ちる
         {
             countDown = true;
         }
+        if (collision.gameObject.CompareTag("Skill"))//Skillのコリジョン接触が起きた瞬間に床が落ちる
+        {
+            fall = true;
+        }
     }
+
+
 }
