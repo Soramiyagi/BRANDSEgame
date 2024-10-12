@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -15,9 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float skill1CooldownTime = 5.0f;
     [SerializeField] private float skill2CooldownTime = 7.0f;
 
-   private bool CanSkiilHold1 = true;
-   private bool CanSkiilHold2 = true;
-
+    private float moveHorizontal, moveVertical;
 
     // プロパティでフィールドを操作
     protected virtual float Speed
@@ -55,8 +54,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        HandleJump();
-        HandleSkills(); // 2つのスキル処理を管理
     }
 
     // 移動処理
@@ -68,46 +65,54 @@ public class Player : MonoBehaviour
     // 移動メソッド
     protected void HandleMovement()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
     }
 
-    // ジャンプ処理
-    protected void HandleJump()
+    // 左スティックや十字キーで移動
+    public void OnMove(InputAction.CallbackContext Move)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        Vector2 movementInput = Move.ReadValue<Vector2>();
+        moveHorizontal = movementInput.x;
+        moveVertical = movementInput.y;
+    }
+
+    // Jump処理
+    public void OnJump(InputAction.CallbackContext Jump)
+    {
+        if (Jump.started && isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
             isGrounded = false;
         }
     }
 
-    // スキルの発動処理を2つに分ける
-    protected void HandleSkills()
+    //Skill1処理
+    public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        // スキル1：キーが押されている間の処理
-        if (Input.GetKey(KeyCode.F) && canUseSkill1&& CanSkiilHold1)
+        if (Skill1.performed)
         {
+            //押している間
             Skill1Held();
-            CanSkiilHold1 = false;
         }
-        // スキル1：キーが離されたときの処理
-        if (Input.GetKeyUp(KeyCode.F) && canUseSkill1)
+        else if (Skill1.canceled)
         {
+            //離した時
             UseSkill1();
         }
+    }
 
-        // スキル2：キーが押されている間の処理
-        if (Input.GetKey(KeyCode.G) && canUseSkill2&& CanSkiilHold2)
+    //Skill2処理
+    public void OnSkill2(InputAction.CallbackContext Skill2)
+    {
+        if (Skill2.performed)
         {
+            //押している間
             Skill2Held();
-            CanSkiilHold2 = false;
         }
-        // スキル2：キーが離されたときの処理
-        if (Input.GetKeyUp(KeyCode.G) && canUseSkill2)
+        else if (Skill2.canceled)
         {
+            //離した時
             UseSkill2();
         }
     }
@@ -145,7 +150,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(Skill1CooldownTime);
         canUseSkill1 = true;
-        CanSkiilHold1 = true;
         Debug.Log("Skill 1 ready!");
     }
 
@@ -154,7 +158,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(Skill2CooldownTime);
         canUseSkill2 = true;
-        CanSkiilHold2 = true;
         Debug.Log("Skill 2 ready!");
     }
 
@@ -167,4 +170,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-

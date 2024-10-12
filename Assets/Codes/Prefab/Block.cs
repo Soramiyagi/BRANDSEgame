@@ -14,10 +14,15 @@ public class Block : MonoBehaviour
     Vector3 startPos;   //このブロックの初期位置
     Vector3 currentPos; //このブロックの現在位置
 
+    //マテリアル関連
+    [SerializeField] private Material safety, caution, danger;
+    new Renderer renderer;
+
     // Start is called before the first frame update
     void Start()
     {
         startPos = this.transform.position;
+        renderer = GetComponent<Renderer>();
 
         StateReset();
     }
@@ -39,6 +44,7 @@ public class Block : MonoBehaviour
             else
             {
                 fall = true;
+                renderer.material = danger;
             }
         }
         
@@ -65,6 +71,7 @@ public class Block : MonoBehaviour
         time = 5f;
         currentPos = startPos;
         this.transform.position = currentPos;
+        renderer.material = safety;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -72,12 +79,12 @@ public class Block : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))//Playerが床に接触すると一定時間経過後に床が落ちる
         {
             countDown = true;
+            renderer.material = caution;
         }
         if (collision.gameObject.CompareTag("Skill"))//Skillのコリジョン接触が起きた瞬間に床が落ちる
         {
             fall = true;
+            renderer.material = danger;
         }
     }
-
-
 }
