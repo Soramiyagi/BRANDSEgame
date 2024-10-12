@@ -16,9 +16,9 @@ public class BlockManager : MonoBehaviour
     void Start()
     {
         //フィールドのブロックを配置
-        for (int i = 0; i < blockHeight; i++)
+        for (int i = 0; i < blockWidth; i++)
         {
-            for (int j = 0; j < blockWidth; j++)
+            for (int j = 0; j < blockHeight; j++)
             {
                 Instantiate(block, new Vector3(blockInterval * i, 0, blockInterval * j), Quaternion.identity, this.transform).name = $"Block_{i}_{j}";
             }
