@@ -13,13 +13,63 @@ public class Bomb : Player
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
     // プレハブを生成するための変数
-    public GameObject prefab; // プレハブの参照をインスペクタで設定
+    public GameObject skill1Prehub; // スキル1のプレハブ
+    public GameObject skill2Prehub; // スキル2のプレハブ
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
+
+    private bool previewSkill1 = false; // skill1のプレビューのためのフラグ
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        Debug.Log(moveHorizontal);
+
+        if (previewSkill1 && spawnedPrefab != null)
+        {
+            // プレイヤーの位置に追従 (Y軸を-0.5してプレイヤーの下に置く)
+            Vector3 followPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z + 4);
+            spawnedPrefab.transform.position = followPosition;
+            Debug.Log("Skill1 prefab is following the player.");
+
+        }
+    }
+
+    protected override void Skill1Held()
+    {
+        previewSkill1 = true;
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        spawnedPrefab = Instantiate(skill1Prehub, spawnPosition, Quaternion.identity);
+
+        // コリジョンをオフにする処理
+        Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
+        if (prefabCollider != null)
+        {
+            prefabCollider.enabled = false; // コリジョンをオフに
+        }
+    }
+
+    protected override void UseSkill1()
+    {
+        previewSkill1 = false;
+        if (spawnedPrefab != null)
+        {
+            // プレハブをその位置に固定し、コリジョンをオンにする
+            Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
+            if (prefabCollider != null)
+            {
+                prefabCollider.enabled = true; // コリジョンをオンに
+            }
+
+            // プレハブを削除する処理
+            StartCoroutine(DestroyPrefabAfterDelay(0.1f));
+        }
+        base.UseSkill1(); // クールダウン処理
     }
 
     // スキル2が押されている間の処理をオーバーライド
@@ -29,7 +79,7 @@ public class Bomb : Player
         {
             // プレイヤーの位置からY軸を-0.5した位置にプレハブを生成
             Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-            spawnedPrefab = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            spawnedPrefab = Instantiate(skill2Prehub, spawnPosition, Quaternion.identity);
 
             // コリジョンをオフにする処理
             Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
@@ -59,7 +109,6 @@ public class Bomb : Player
             if (prefabCollider != null)
             {
                 prefabCollider.enabled = true; // コリジョンをオンに
-            
             }
 
             // プレハブを削除する処理
@@ -76,10 +125,8 @@ public class Bomb : Player
         if (spawnedPrefab != null)
         {
             Destroy(spawnedPrefab); // プレハブを削除
-            
         }
     }
 }
-
 
 
