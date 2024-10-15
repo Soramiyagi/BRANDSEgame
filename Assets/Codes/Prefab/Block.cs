@@ -10,6 +10,7 @@ public class Block : MonoBehaviour
     bool countDown;     //ブロックが落ちるまでのカウントを開始するフラグ
     float time;         //ブロックが落ちるまでの時間
 
+    public float timeSet = 0;
 
     Vector3 startPos;   //このブロックの初期位置
     Vector3 currentPos; //このブロックの現在位置
@@ -68,7 +69,7 @@ public class Block : MonoBehaviour
         fall = false;
         fallSpeed = 3f;
         countDown = false;
-        time = 5f;
+        time = timeSet;
         currentPos = startPos;
         this.transform.position = currentPos;
         renderer.material = safety;
@@ -78,8 +79,11 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))//Playerが床に接触すると一定時間経過後に床が落ちる
         {
-            countDown = true;
-            renderer.material = caution;
+            if (fall == false)
+            {
+                countDown = true;
+                renderer.material = caution;
+            }
         }
         if (collision.gameObject.CompareTag("Skill"))//Skillのコリジョン接触が起きた瞬間に床が落ちる
         {

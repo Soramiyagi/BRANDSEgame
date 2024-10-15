@@ -153,11 +153,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 6414752691340138724, guid: 3778f08504193dc46b78e4c19bb01b81, type: 3}
   flyStone: {fileID: 9045903999828152464, guid: 2eb91a95aa6258d42acae27a3bced11e, type: 3}
-  flyStonePos:
-  - {x: 0, y: 0}
-  - {x: 6, y: 6}
-  - {x: -1, y: -1}
-  - {x: -1, y: -1}
   blockWidth: 20
   blockHeight: 20
   blockInterval: 1.05
@@ -514,6 +509,7 @@ MonoBehaviour:
   skill1CooldownTime: 5
   skill2CooldownTime: 7
   characterName: DefaultCharacter
+  prefab: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
 --- !u!114 &1470199879
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     //Skill1ˆ—
     public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        if (Skill1.performed)
+        if (Skill1.started)
         {
             //‰Ÿ‚µ‚Ä‚¢‚éŠÔ
             Skill1Held();
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
     //Skill2ˆ—
     public void OnSkill2(InputAction.CallbackContext Skill2)
     {
-        if (Skill2.performed)
+        if (Skill2.started)
         {
             //‰Ÿ‚µ‚Ä‚¢‚éŠÔ
             Skill2Held();
