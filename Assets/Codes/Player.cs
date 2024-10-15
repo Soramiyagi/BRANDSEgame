@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
 
     protected float moveHorizontal, moveVertical;
 
+    //向きを出すためのもの
+    private Vector3 pointA = new Vector3(0, 0, 0);
+    private Vector3 pointB = new Vector3(0, 0, 0);
+    protected float angle = 0;
+
     // プロパティでフィールドを操作
     protected virtual float Speed
     {
@@ -60,6 +65,16 @@ public class Player : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         HandleMovement();
+
+        //向き計算
+        pointB = new Vector3(moveHorizontal, 0, moveVertical);
+        // ベクトルの計算
+        Vector3 direction = pointB - pointA;
+        // 角度を計算
+        angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
+
+        Quaternion targetRotation = Quaternion.Euler(0, -angle + 90, 0);
+        this.transform.rotation = targetRotation;
     }
 
     // 移動メソッド
@@ -90,7 +105,7 @@ public class Player : MonoBehaviour
     //Skill1処理
     public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        if (Skill1.started)
+        if (Skill1.started && canUseSkill1 == true)
         {
             //押している間
             Skill1Held();
@@ -105,7 +120,7 @@ public class Player : MonoBehaviour
     //Skill2処理
     public void OnSkill2(InputAction.CallbackContext Skill2)
     {
-        if (Skill2.started)
+        if (Skill2.started && canUseSkill2 == true)
         {
             //押している間
             Skill2Held();
@@ -126,9 +141,7 @@ public class Player : MonoBehaviour
     // スキル1を発動する処理
     protected virtual void UseSkill1()
     {
-        
         canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
     }
 
     // スキル2が押されている間の処理
@@ -140,13 +153,11 @@ public class Player : MonoBehaviour
     // スキル2を発動する処理
     protected virtual void UseSkill2()
     {
-        
         canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
     }
 
     // スキル1のクールダウン処理
-    IEnumerator Skill1Cooldown()
+    protected virtual IEnumerator Skill1Cooldown()
     {
         yield return new WaitForSeconds(Skill1CooldownTime);
         canUseSkill1 = true;
@@ -154,7 +165,7 @@ public class Player : MonoBehaviour
     }
 
     // スキル2のクールダウン処理
-    IEnumerator Skill2Cooldown()
+    protected virtual IEnumerator Skill2Cooldown()
     {
         yield return new WaitForSeconds(Skill2CooldownTime);
         canUseSkill2 = true;
