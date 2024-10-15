@@ -370,8 +370,8 @@ GameObject:
   - component: {fileID: 1470199875}
   - component: {fileID: 1470199874}
   - component: {fileID: 1470199873}
-  - component: {fileID: 1470199878}
   - component: {fileID: 1470199879}
+  - component: {fileID: 1470199880}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -492,24 +492,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1470199878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470199872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0ab6bbc9e4c3045a879cec51604214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  jumpForce: 5
-  skill1CooldownTime: 5
-  skill2CooldownTime: 7
-  characterName: DefaultCharacter
-  prefab: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
 --- !u!114 &1470199879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +519,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470199878}
+      - m_Target: {fileID: 1470199880}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -553,7 +535,7 @@ MonoBehaviour:
     m_ActionName: Action/Move[/XInputControllerWindows/leftStick/up,/DualShock4GamepadHID/leftStick/up,/SwitchProControllerHID/leftStick/up,/XInputControllerWindows/leftStick/down,/DualShock4GamepadHID/leftStick/down,/SwitchProControllerHID/leftStick/down,/XInputControllerWindows/leftStick/left,/DualShock4GamepadHID/leftStick/left,/SwitchProControllerHID/leftStick/left,/XInputControllerWindows/leftStick/right,/DualShock4GamepadHID/leftStick/right,/SwitchProControllerHID/leftStick/right,/XInputControllerWindows/dpad/up,/DualShock4GamepadHID/dpad/up,/SwitchProControllerHID/dpad/up,/XInputControllerWindows/dpad/down,/DualShock4GamepadHID/dpad/down,/SwitchProControllerHID/dpad/down,/XInputControllerWindows/dpad/left,/DualShock4GamepadHID/dpad/left,/SwitchProControllerHID/dpad/left,/DualShock4GamepadHID/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470199878}
+      - m_Target: {fileID: 1470199880}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnSkill1
         m_Mode: 0
@@ -569,7 +551,7 @@ MonoBehaviour:
     m_ActionName: Action/Skill1[/XInputControllerWindows/rightShoulder,/DualShock4GamepadHID/rightShoulder,/SwitchProControllerHID/rightShoulder,/XInputControllerWindows/rightTrigger,/DualShock4GamepadHID/rightTrigger,/SwitchProControllerHID/rightTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470199878}
+      - m_Target: {fileID: 1470199880}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnSkill2
         m_Mode: 0
@@ -585,7 +567,7 @@ MonoBehaviour:
     m_ActionName: Action/Skill2[/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/leftShoulder,/SwitchProControllerHID/leftShoulder,/XInputControllerWindows/leftTrigger,/DualShock4GamepadHID/leftTrigger,/SwitchProControllerHID/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470199878}
+      - m_Target: {fileID: 1470199880}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -604,6 +586,25 @@ MonoBehaviour:
   m_DefaultActionMap: Action
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1470199880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470199872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402625b95d8e05c40ac9f4c4f1a4e0b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  jumpForce: 5
+  skill1CooldownTime: 5
+  skill2CooldownTime: 7
+  characterName: DefaultCharacter
+  prefab: {fileID: 0}
+  forceAmount: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

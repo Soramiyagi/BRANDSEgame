@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float skill1CooldownTime = 5.0f;
     [SerializeField] private float skill2CooldownTime = 7.0f;
 
-    private float moveHorizontal, moveVertical;
+    protected float moveHorizontal, moveVertical;
 
     // プロパティでフィールドを操作
     protected virtual float Speed

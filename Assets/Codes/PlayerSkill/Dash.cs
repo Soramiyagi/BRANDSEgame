@@ -16,6 +16,10 @@ public class Dash : Player
     public GameObject prefab; // プレハブの参照をインスペクタで設定
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
+    public float forceAmount = 10f; // 加える力の大きさ(ダッシュの早さ)
+    private bool skill1Flag = true;
+
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -26,13 +30,35 @@ public class Dash : Player
     // スキル1が押されている間の処理をオーバーライド
     protected override void Skill1Held()
     {
+        if (canUseSkill1 == true)
+        {
+            // 点Aの設定
+            Vector3 pointA = new Vector3(0, 0, 0);
 
+            // 点Bの設定
+            Vector3 pointB = new Vector3(moveHorizontal, 0, moveVertical);
+
+            // ベクトルの計算
+            Vector3 direction = pointB - pointA;
+
+            // 角度を計算
+            float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
+
+            // 角度をラジアンに変換
+            float radians = angle * Mathf.Deg2Rad;
+
+            // 力のベクトルを計算
+            Vector3 force = new Vector3(Mathf.Cos(radians), 0, Mathf.Sin(radians)) * forceAmount;
+
+            // 指定した角度方向に力を加える
+            rb.AddForce(force, ForceMode.Impulse);
+            canUseSkill1 = false;
+        }
     }
 
     // スキル1を発動する処理をオーバーライド
     protected override void UseSkill1()
     {
-
     }
 
     // スキル2が押されている間の処理をオーバーライド
@@ -58,6 +84,3 @@ public class Dash : Player
         }
     }
 }
-
-
-
