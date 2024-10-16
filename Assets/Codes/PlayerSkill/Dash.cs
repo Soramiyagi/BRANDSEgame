@@ -6,7 +6,7 @@ public class Dash : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject clones;
+    [SerializeField] private GameObject clones, extendCollider;
 
     // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
     protected override float Speed { get; set; } = 2.0f; // スピード値
@@ -14,14 +14,13 @@ public class Dash : Player
     protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
-    // プレハブを生成するための変数
-    public GameObject prefab; // プレハブの参照をインスペクタで設定
-    private GameObject spawnedPrefab; // 生成されたプレハブの参照
-
     public float forceAmount = 10f; // 加える力の大きさ(ダッシュの早さ)
-    private bool skill1Flag = true;
 
-    private float skill2Keep = 0;
+    //ET = EffectTime(効果時間)
+    private float skill1_ET = 0;
+    private float skill2_ET = 0;
+    public float skill1_ET_Set = 0;
+    public float skill2_ET_Set = 0;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -33,9 +32,28 @@ public class Dash : Player
     {
         base.FixedUpdate();
 
-        if(skill2Keep > 0)
+        if (skill1_ET > 0)
         {
-            skill2Keep = skill2Keep - Time.deltaTime;
+            skill1_ET = skill1_ET - Time.deltaTime;
+        }
+        else
+        {
+            if (canMoveInput == false && rb.useGravity == false)
+            {
+                // オブジェクトの速度と角速度をゼロに設定
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+
+                canMoveInput = true;
+                rb.useGravity = true;
+
+                extendCollider.SetActive(false);
+            }
+        }
+
+        if (skill2_ET > 0)
+        {
+            skill2_ET = skill2_ET - Time.deltaTime;
         }
         else
         {
@@ -43,45 +61,46 @@ public class Dash : Player
         }
     }
 
-    // スキル1が押されている間の処理をオーバーライド
-    protected override void Skill1Held()
+    // スキル1が押された時の処理をオーバーライド
+    protected override void Skill1Push()
     {
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.1f, this.transform.position.z);
+        canMoveInput = false;
+
+        rb.useGravity = false;
+        skill1_ET = skill1_ET_Set;
+
+        extendCollider.SetActive(true);
+
         float radians = angle * Mathf.Deg2Rad;
         // 力のベクトルを計算
         Vector3 force = new Vector3(Mathf.Cos(radians), 0, Mathf.Sin(radians)) * forceAmount;
 
         // 指定した角度方向に力を加える
         rb.AddForce(force, ForceMode.Impulse);
+
+        canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
     }
 
-    // スキル1を発動する処理をオーバーライド
-    protected override void UseSkill1()
+    // スキル1を離したときの処理をオーバーライド
+    protected override void Skill1Release()
     {
     }
 
-    // スキル2が押されている間の処理をオーバーライド
-    protected override void Skill2Held()
+    // スキル2が押された時の処理をオーバーライド
+    protected override void Skill2Push()
     {
         clones.SetActive(true);
-        skill2Keep = 5;
+        skill2_ET = skill2_ET_Set;
+
+        canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
     }
 
-    // スキル2を発動する処理をオーバーライド
-    protected override void UseSkill2()
+    // スキル2を離したときの処理をオーバーライド
+    protected override void Skill2Release()
     {
 
-    }
-
-    // 1秒後にプレハブを削除するためのコルーチン
-    private IEnumerator DestroyPrefabAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay); // 指定した秒数待機
-        if (spawnedPrefab != null)
-        {
-            Destroy(spawnedPrefab); // プレハブを削除
-            
-        }
     }
 }

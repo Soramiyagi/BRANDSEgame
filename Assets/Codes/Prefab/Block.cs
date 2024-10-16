@@ -91,4 +91,16 @@ public class Block : MonoBehaviour
             renderer.material = danger;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (fall == false)
+            {
+                countDown = true;
+                renderer.material = caution;
+            }
+        }
+    }
 }
