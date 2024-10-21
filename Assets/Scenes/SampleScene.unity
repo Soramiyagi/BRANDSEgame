@@ -122,9 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< HEAD
---- !u!1001 &762030176
-=======
+
 --- !u!1001 &282494830
 >>>>>>> origin/main
 PrefabInstance:
@@ -134,64 +132,8 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.733
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.265
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_Name
-      value: bombWalk
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330755669629619180, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.011190686
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330755669629619180, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.072694555
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: f54564d870997be43921e9b621129b59, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: bb8be3123d6afea4e9237a86f6ee270e, type: 2}
-=======
+
+
     - target: {fileID: 669896543061620713, guid: 1760157f69f1ad844b1abb5ceccd491a, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 5
@@ -293,9 +235,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-<<<<<<< HEAD
-  m_SourcePrefab: {fileID: 100100000, guid: f54564d870997be43921e9b621129b59, type: 3}
-=======
+
+
   m_SourcePrefab: {fileID: 100100000, guid: 1760157f69f1ad844b1abb5ceccd491a, type: 3}
 >>>>>>> origin/main
 --- !u!1 &938564746
@@ -803,9 +744,8 @@ MonoBehaviour:
   characterName: DefaultCharacter
   skill1Prehub: {fileID: 8695393513866463213, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
   skill2Prehub: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
-=======
->>>>>>> origin/main
---- !u!1660057539 &9223372036854775807
+
+
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
@@ -815,6 +755,5 @@ SceneRoots:
 <<<<<<< HEAD
   - {fileID: 1470199877}
   - {fileID: 762030176}
-=======
-  - {fileID: 282494830}
->>>>>>> origin/main
+
+
