@@ -16,12 +16,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float skill1CooldownTime = 5.0f;
     [SerializeField] private float skill2CooldownTime = 7.0f;
 
+    //Lスティックの座標を表す
     protected float moveHorizontal, moveVertical;
+    //Rスティックの座標を表す
+    protected float RS_Horizontal, RS_Vertical;
 
     //向きを出すためのもの
     private Vector3 pointA = new Vector3(0, 0, 0);
     private Vector3 pointB = new Vector3(0, 0, 0);
     protected float angle = 0;
+
+    //スキルを使用する際にみるフラグ
+    protected bool canUseSkill1 = true;
+    protected bool canUseSkill2 = true;
+
+    //一時的に入力禁止にしたい際に使用するフラグ
+    protected bool canMoveInput = true;
 
     // プロパティでフィールドを操作
     protected virtual float Speed
@@ -46,9 +56,6 @@ public class Player : MonoBehaviour
         get { return skill2CooldownTime; }
         set { skill2CooldownTime = value; }
     }
-
-    protected bool canUseSkill1 = true;
-    protected bool canUseSkill2 = true;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -75,7 +82,7 @@ public class Player : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.Euler(0, -angle + 90, 0);
         this.transform.rotation = targetRotation;
-    }
+    }    
 
     // 移動メソッド
     protected void HandleMovement()
@@ -84,76 +91,96 @@ public class Player : MonoBehaviour
         transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
     }
 
-    // 左スティックや十字キーで移動
+    // 左スティックで移動
     public void OnMove(InputAction.CallbackContext Move)
     {
-        Vector2 movementInput = Move.ReadValue<Vector2>();
-        moveHorizontal = movementInput.x;
-        moveVertical = movementInput.y;
+        if (canMoveInput == true)
+        {
+            Vector2 movementInput = Move.ReadValue<Vector2>();
+            moveHorizontal = movementInput.x;
+            moveVertical = movementInput.y;
+        }
+    }
+
+
+    // 右スティック入力の取得
+    public void OnRightStick(InputAction.CallbackContext RightStick)
+    {
+        if (canMoveInput == true)
+        {
+            Vector2 RS_Input = RightStick.ReadValue<Vector2>();
+            RS_Horizontal = RS_Input.x;
+            RS_Vertical = RS_Input.y;
+        }
     }
 
     // Jump処理
     public void OnJump(InputAction.CallbackContext Jump)
     {
-        if (Jump.started && isGrounded)
+        if (canMoveInput == true)
         {
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
-            isGrounded = false;
+            if (Jump.started && isGrounded)
+            {
+                rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
+                isGrounded = false;
+            }
         }
     }
 
     //Skill1処理
     public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        if (Skill1.started && canUseSkill1 == true)
+        if (canMoveInput == true)
         {
-            //押している間
-            Skill1Held();
-        }
-        else if (Skill1.canceled)
-        {
-            //離した時
-            UseSkill1();
+            if (Skill1.started && canUseSkill1 == true)
+            {
+                //押した時
+                Skill1Push();
+            }
+            else if (Skill1.canceled)
+            {
+                //離した時
+                Skill1Release();
+            }
         }
     }
 
     //Skill2処理
     public void OnSkill2(InputAction.CallbackContext Skill2)
     {
-        if (Skill2.started && canUseSkill2 == true)
+        if (canMoveInput == true)
         {
-            //押している間
-            Skill2Held();
+            if (Skill2.started && canUseSkill2 == true)
+            {
+                //押した時
+                Skill2Push();
+            }
+            else if (Skill2.canceled)
+            {
+                //離した時
+                Skill2Release();
+            }
         }
-        else if (Skill2.canceled)
-        {
-            //離した時
-            UseSkill2();
-        }
     }
 
-    // スキル1が押されている間の処理
-    protected virtual void Skill1Held()
+    // スキル1が押された時の処理
+    protected virtual void Skill1Push()
     {
-        
     }
 
-    // スキル1を発動する処理
-    protected virtual void UseSkill1()
-    {
-        canUseSkill1 = false;
+    // スキル1が離された時の処理
+    protected virtual void Skill1Release()
+    {   
     }
 
-    // スキル2が押されている間の処理
-    protected virtual void Skill2Held()
+    // スキル2が押された時の処理
+    protected virtual void Skill2Push()
     {
-        
     }
 
-    // スキル2を発動する処理
-    protected virtual void UseSkill2()
-    {
-        canUseSkill2 = false;
+    // スキル2が離された時の処理
+    protected virtual void Skill2Release()
+    {   
     }
 
     // スキル1のクールダウン処理
