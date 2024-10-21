@@ -122,6 +122,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &762030176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.733
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.265
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_Name
+      value: bombWalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330755669629619180, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.011190686
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330755669629619180, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.072694555
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f54564d870997be43921e9b621129b59, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bb8be3123d6afea4e9237a86f6ee270e, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f54564d870997be43921e9b621129b59, type: 3}
 --- !u!1 &938564746
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +441,7 @@ GameObject:
   - component: {fileID: 1470199873}
   - component: {fileID: 1470199879}
   - component: {fileID: 1470199880}
+  - component: {fileID: 1470199881}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -593,7 +663,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470199872}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 402625b95d8e05c40ac9f4c4f1a4e0b2, type: 3}
   m_Name: 
@@ -603,8 +673,28 @@ MonoBehaviour:
   skill1CooldownTime: 5
   skill2CooldownTime: 7
   characterName: DefaultCharacter
+  clones: {fileID: 0}
   prefab: {fileID: 0}
   forceAmount: 10
+--- !u!114 &1470199881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470199872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0ab6bbc9e4c3045a879cec51604214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  jumpForce: 5
+  skill1CooldownTime: 5
+  skill2CooldownTime: 7
+  characterName: DefaultCharacter
+  skill1Prehub: {fileID: 8695393513866463213, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
+  skill2Prehub: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -613,3 +703,4 @@ SceneRoots:
   - {fileID: 1125842688}
   - {fileID: 938564748}
   - {fileID: 1470199877}
+  - {fileID: 762030176}
