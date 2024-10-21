@@ -40,7 +40,7 @@ public class Bomb : Player
         }
     }
 
-    protected override void Skill1Held()
+    protected override void Skill1Push()
     {
         previewSkill1 = true;
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
@@ -54,7 +54,7 @@ public class Bomb : Player
         }
     }
 
-    protected override void UseSkill1()
+    protected override void Skill1Release()
     {
         previewSkill1 = false;
         if (spawnedPrefab != null)
@@ -69,11 +69,11 @@ public class Bomb : Player
             // プレハブを削除する処理
             StartCoroutine(DestroyPrefabAfterDelay(0.1f));
         }
-        base.UseSkill1(); // クールダウン処理
+       
     }
 
     // スキル2が押されている間の処理をオーバーライド
-    protected override void Skill2Held()
+    protected override void Skill2Push()
     {
         if (spawnedPrefab == null)
         {
@@ -100,7 +100,7 @@ public class Bomb : Player
     }
 
     // スキル2を発動する処理をオーバーライド
-    protected override void UseSkill2()
+    protected override void Skill2Release()
     {
         if (spawnedPrefab != null)
         {
@@ -115,7 +115,7 @@ public class Bomb : Player
             StartCoroutine(DestroyPrefabAfterDelay(0.1f));
         }
 
-        base.UseSkill2(); // クールダウン処理
+       // クールダウン処理
     }
 
     // 1秒後にプレハブを削除するためのコルーチン
